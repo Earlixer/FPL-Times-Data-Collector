@@ -1,0 +1,17 @@
+{
+  "season": "2026/27",
+  "competitions": {
+    "main": {
+      "name": "Baller League 2026",
+      "fplLeagueId": 1453270
+    },
+    "premier": {
+      "name": "Baller Champions League",
+      "fplLeagueId": 1453560
+    },
+    "europa": {
+      "name": "Ballers Europa League",
+      "fplLeagueId": 1007472
+    }
+  }
+}
