@@ -33,6 +33,37 @@ import type {
   NewsroomFixture
 } from "./types/newsroom.js";
 
+function parseGameweekArg(args: string[]): number {
+  const flagIndex = args.findIndex(
+    (arg) =>
+      arg === "--gw" ||
+      arg === "--gameweek" ||
+      arg === "-g"
+  );
+
+  if (flagIndex === -1) {
+    return 1;
+  }
+
+  const rawValue = args[flagIndex + 1];
+
+  if (!rawValue) {
+    throw new Error(
+      "Missing gameweek value. Use --gw <number>"
+    );
+  }
+
+  const value = Number.parseInt(rawValue, 10);
+
+  if (!Number.isInteger(value) || value <= 0) {
+    throw new Error(
+      `Invalid gameweek value: ${rawValue}`
+    );
+  }
+
+  return value;
+}
+
 function collectSquadPlayerIds(
   managers: NewsroomManager[]
 ): Set<number> {
@@ -109,7 +140,9 @@ async function main(): Promise<void> {
   try {
     const config = await loadConfig();
 
-    const gameweek = 1;
+    const gameweek = parseGameweekArg(
+      process.argv.slice(2)
+    );
 
     console.log(
       `Collecting FPL Times data for Gameweek ${gameweek}...`

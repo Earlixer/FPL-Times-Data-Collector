@@ -72,6 +72,9 @@ async function request<T>(
         console.log(
           `    Request failed. Retrying (${attempt}/${MAX_RETRIES})...`
         );
+        console.log(
+          `    Error: ${error}...`
+        );
 
         await new Promise(
           (resolve) =>
